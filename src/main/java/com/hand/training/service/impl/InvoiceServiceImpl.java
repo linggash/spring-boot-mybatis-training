@@ -5,6 +5,7 @@ import com.hand.training.mapper.InvoiceHeaderMapper;
 import com.hand.training.mapper.InvoiceLineMapper;
 import com.hand.training.model.InvoiceHeaderResponse;
 import com.hand.training.model.InvoiceLineResponse;
+import com.hand.training.model.InvoiceStatus;
 import com.hand.training.service.InvoiceService;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,14 @@ public class InvoiceServiceImpl implements InvoiceService {
     private InvoiceLineMapper invoiceLineMapper;
 
     @Override
-    public List<InvoiceHeaderResponse> list(int page, int size) {
+    public List<InvoiceHeaderResponse> list(
+            int page,
+            int size,
+            InvoiceStatus status,
+            String type
+    ) {
         int offset = (page - 1) * size;
-        List<InvoiceHeader> invoiceHeaders = invoiceHeaderMapper.list(size, offset);
+        List<InvoiceHeader> invoiceHeaders = invoiceHeaderMapper.list(size, offset, status.value, type);
         List<InvoiceHeaderResponse> responses = new ArrayList<>();
         invoiceHeaders.forEach(invoiceHeader -> {
             List<InvoiceLineResponse> invoiceLines = new ArrayList<>();

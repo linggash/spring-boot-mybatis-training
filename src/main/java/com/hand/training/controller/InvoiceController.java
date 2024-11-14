@@ -1,6 +1,7 @@
 package com.hand.training.controller;
 
 import com.hand.training.model.InvoiceHeaderResponse;
+import com.hand.training.model.InvoiceStatus;
 import com.hand.training.model.WebResponse;
 import com.hand.training.service.InvoiceService;
 import io.swagger.annotations.ApiOperation;
@@ -23,9 +24,11 @@ public class InvoiceController {
     @ApiOperation("list")
     public WebResponse<List<InvoiceHeaderResponse>> list(
             @RequestParam(defaultValue = "1", name = "page") int page,
-            @RequestParam(defaultValue = "10", name = "size") int size
-    ) {
-        List<InvoiceHeaderResponse> response = invoiceService.list(page, size);
+            @RequestParam(defaultValue = "10", name = "size") int size,
+            @RequestParam(defaultValue = "", name ="status") InvoiceStatus status,
+            @RequestParam(defaultValue = "", name="type") String type
+            ) {
+        List<InvoiceHeaderResponse> response = invoiceService.list(page, size, status, type);
         return WebResponse.<List<InvoiceHeaderResponse>>builder()
                 .data(response)
                 .status("success")

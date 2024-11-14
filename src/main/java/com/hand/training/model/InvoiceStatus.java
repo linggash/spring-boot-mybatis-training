@@ -6,9 +6,9 @@ public enum InvoiceStatus {
     FAIL("F"),
     CANCELLED("C");
 
-    public final String label;
+    public final String value;
 
-    private InvoiceStatus(String label){
-        this.label = label;
+    private InvoiceStatus(String value){
+        this.value = value;
     }
 }

@@ -8,7 +8,13 @@ import java.util.List;
 
 @Mapper
 public interface InvoiceHeaderMapper {
-    List<InvoiceHeader> list(@Param("limit") int limit, @Param("offset") int offset);
+
+    List<InvoiceHeader> list (
+            @Param("limit") int limit,
+            @Param("offset") int offset,
+            @Param("status")String status,
+            @Param("type") String type
+    );
 
     InvoiceHeader detail(Long id);
 

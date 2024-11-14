@@ -36,6 +36,14 @@
         FROM invoice_header ih
         LEFT JOIN invoice_line il ON ih.invoice_header_id = il.invoice_header_id
         WHERE ih.del_flag = 0
+        <trim prefix="AND">
+            <if test="status != null">
+                ih.status = #{status}
+            </if>
+            <if test="type != null and type != ''" >
+                ih.invoice_type = #{type}
+            </if>
+        </trim>
         ORDER BY ih.invoice_header_id
         LIMIT #{offset},#{limit}
     </select>
