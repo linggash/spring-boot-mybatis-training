@@ -1,7 +1,6 @@
 package com.hand.training.controller;
 
 import com.hand.training.model.InvoiceHeaderResponse;
-import com.hand.training.model.InvoiceLineResponse;
 import com.hand.training.model.WebResponse;
 import com.hand.training.service.InvoiceService;
 import io.swagger.annotations.ApiOperation;
@@ -41,6 +40,18 @@ public class InvoiceController {
         InvoiceHeaderResponse response = invoiceService.detail(id);
         return WebResponse.<InvoiceHeaderResponse>builder()
                 .data(response)
+                .status("success")
+                .build();
+    }
+
+    @ApiOperation("remove")
+    @DeleteMapping
+    public WebResponse<String> remove(
+            @RequestBody List<Long> ids
+    ) {
+        invoiceService.remove(ids);
+        return WebResponse.<String>builder()
+                .data("Data deleted")
                 .status("success")
                 .build();
     }

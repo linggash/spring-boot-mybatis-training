@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hand.training.mapper.InvoiceLineMapper">
+    <resultMap id="invoiceLineMap" type = "com.hand.training.entity.InvoiceLine">
+        <id column="invoice_line_id" property="invoiceLineId"/>
+        <result column="invoice_header_id" property="invoiceHeaderId"/>
+        <result column="item_number" property="itemNumber"/>
+        <result column="item_description" property="itemDescription"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="quantity" property="quantity"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="remark" property="remark"/>
+        <result column="creation_date" property="creationDate"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="last_updated_by" property="lastUpdatedBy"/>
+        <result column="last_update_date" property="lastUpdateDate"/>
+    </resultMap>
+
+    <delete id="remove">
+        DELETE FROM invoice_line WHERE invoice_header_id = #{id}
+    </delete>
+</mapper>

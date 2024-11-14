@@ -2,6 +2,7 @@ package com.hand.training.service.impl;
 
 import com.hand.training.entity.InvoiceHeader;
 import com.hand.training.mapper.InvoiceHeaderMapper;
+import com.hand.training.mapper.InvoiceLineMapper;
 import com.hand.training.model.InvoiceHeaderResponse;
 import com.hand.training.model.InvoiceLineResponse;
 import com.hand.training.service.InvoiceService;
@@ -20,6 +21,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Autowired
     private InvoiceHeaderMapper invoiceHeaderMapper;
+
+    @Autowired
+    private InvoiceLineMapper invoiceLineMapper;
 
     @Override
     public List<InvoiceHeaderResponse> list(int page, int size) {
@@ -76,5 +80,13 @@ public class InvoiceServiceImpl implements InvoiceService {
                     invoiceLines
             );
         }
+    }
+
+    @Override
+    public void remove(List<Long> ids) {
+        ids.forEach(id -> {
+            invoiceHeaderMapper.remove(id);
+            invoiceLineMapper.remove(id);
+        });
     }
 }

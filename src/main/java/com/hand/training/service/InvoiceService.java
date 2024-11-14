@@ -9,4 +9,6 @@ public interface InvoiceService {
     List<InvoiceHeaderResponse> list(int page, int size);
 
     InvoiceHeaderResponse detail(Long id);
+
+    void remove(List<Long> ids);
 }

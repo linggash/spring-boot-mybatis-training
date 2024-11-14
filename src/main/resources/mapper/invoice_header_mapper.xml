@@ -48,4 +48,9 @@
         LEFT JOIN invoice_line il ON ih.invoice_header_id = il.invoice_header_id
         WHERE ih.invoice_header_id = #{id} AND ih.del_flag = 0
     </select>
+
+    <update id="remove">
+        UPDATE invoice_header SET del_flag = 1
+        WHERE invoice_header.invoice_header_id = #{id}
+    </update>
 </mapper>
