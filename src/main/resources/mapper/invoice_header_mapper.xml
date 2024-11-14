@@ -37,7 +37,7 @@
         LEFT JOIN invoice_line il ON ih.invoice_header_id = il.invoice_header_id
         WHERE ih.del_flag = 0
         <trim prefix="AND">
-            <if test="status != null">
+            <if test="status != '' and status != null">
                 ih.status = #{status}
             </if>
             <if test="type != null and type != ''" >

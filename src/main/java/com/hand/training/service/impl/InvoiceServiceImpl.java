@@ -34,7 +34,11 @@ public class InvoiceServiceImpl implements InvoiceService {
             String type
     ) {
         int offset = (page - 1) * size;
-        List<InvoiceHeader> invoiceHeaders = invoiceHeaderMapper.list(size, offset, status.value, type);
+        String invoiceStatus = "";
+        if (status != null) {
+            invoiceStatus = status.value;
+        }
+        List<InvoiceHeader> invoiceHeaders = invoiceHeaderMapper.list(size, offset, invoiceStatus, type);
         List<InvoiceHeaderResponse> responses = new ArrayList<>();
         invoiceHeaders.forEach(invoiceHeader -> {
             List<InvoiceLineResponse> invoiceLines = new ArrayList<>();
