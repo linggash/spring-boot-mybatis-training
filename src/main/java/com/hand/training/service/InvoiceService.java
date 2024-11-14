@@ -7,4 +7,6 @@ import java.util.List;
 public interface InvoiceService {
 
     List<InvoiceHeaderResponse> list(int page, int size);
+
+    InvoiceHeaderResponse detail(Long id);
 }

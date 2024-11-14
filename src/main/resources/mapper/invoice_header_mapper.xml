@@ -38,4 +38,13 @@
         ORDER BY ih.invoice_header_id
         LIMIT #{offset},#{limit}
     </select>
+
+    <select id="detail" resultMap="invoiceHeaderMap">
+        SELECT
+        ih.invoice_header_id, ih.invoice_number, ih.status, ih.invoice_type, ih.total_amount,
+        il.invoice_line_id, il.item_number, il.item_description, il.unit_price, il.quantity, il.total_amount AS line_total_amount
+        FROM invoice_header ih
+        LEFT JOIN invoice_line il ON ih.invoice_header_id = il.invoice_header_id
+        WHERE ih.invoice_header_id = #{id}
+    </select>
 </mapper>

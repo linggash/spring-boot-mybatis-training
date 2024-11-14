@@ -46,4 +46,28 @@ public class InvoiceServiceImpl implements InvoiceService {
         });
         return responses;
     }
+
+    @Override
+    public InvoiceHeaderResponse detail(Long id) {
+        InvoiceHeader invoiceHeader = invoiceHeaderMapper.detail(id);
+        List<InvoiceLineResponse> invoiceLines = new ArrayList<>();
+        invoiceHeader.getInvoiceLines().forEach(invoiceLine -> {
+            invoiceLines.add(new InvoiceLineResponse(
+                    invoiceLine.getInvoiceLineId(),
+                    invoiceLine.getItemNumber(),
+                    invoiceLine.getItemDescription(),
+                    invoiceLine.getUnitPrice(),
+                    invoiceLine.getQuantity(),
+                    invoiceLine.getTotalAmount()
+            ));
+        });
+        return new InvoiceHeaderResponse(
+                invoiceHeader.getInvoiceHeaderId(),
+                invoiceHeader.getInvoiceNumber(),
+                invoiceHeader.getStatus(),
+                invoiceHeader.getInvoiceType(),
+                invoiceHeader.getTotalAmount(),
+                invoiceLines
+        );
+    }
 }
