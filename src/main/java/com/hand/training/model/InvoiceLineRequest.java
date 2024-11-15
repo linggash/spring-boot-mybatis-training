@@ -1,5 +1,6 @@
 package com.hand.training.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InvoiceLineResponse {
+public class InvoiceLineRequest {
 
     private Long invoiceLineId;
 
@@ -17,11 +18,11 @@ public class InvoiceLineResponse {
 
     private String itemDescription;
 
+    @NotBlank(message = "unitPrice must not be blank")
     private Double unitPrice;
 
+    @NotBlank(message = "quantity must not be blank")
     private Integer quantity;
-
-    private Double totalAmount;
 
     private String remark;
 }

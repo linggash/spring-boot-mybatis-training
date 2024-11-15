@@ -23,5 +23,7 @@ public class InvoiceHeaderResponse {
 
     private Double totalAmount;
 
+    private String remark;
+
     private List<InvoiceLineResponse> invoiceLines;
 }

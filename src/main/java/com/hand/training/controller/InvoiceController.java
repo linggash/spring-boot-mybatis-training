@@ -1,11 +1,11 @@
 package com.hand.training.controller;
 
-import com.hand.training.model.InvoiceHeaderResponse;
-import com.hand.training.model.InvoiceStatus;
-import com.hand.training.model.WebResponse;
+import com.hand.training.model.*;
 import com.hand.training.service.InvoiceService;
 import io.swagger.annotations.ApiOperation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +56,38 @@ public class InvoiceController {
         return WebResponse.<String>builder()
                 .data("Data deleted")
                 .status("success")
+                .build();
+    }
+
+    @ApiOperation("save")
+    @PostMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<InvoiceHeaderResponse>> save(
+            @RequestBody List<InvoiceHeaderRequest> requests
+    ) {
+        List<InvoiceHeaderResponse> response = invoiceService.save(requests);
+        return WebResponse.<List<InvoiceHeaderResponse>>builder()
+                .status("success")
+                .data(response)
+                .build();
+    }
+
+
+    @ApiOperation("saveData")
+    @PostMapping(
+            value = "/saveData",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<InvoiceHeaderResponse>> saveData(
+            @RequestBody List<InvoiceHeaderRequest> requests
+    ) {
+        List<InvoiceHeaderResponse> response = invoiceService.saveData(requests);
+        return WebResponse.<List<InvoiceHeaderResponse>>builder()
+                .status("success")
+                .data(response)
                 .build();
     }
 }

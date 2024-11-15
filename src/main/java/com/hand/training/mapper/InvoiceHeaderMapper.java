@@ -9,6 +9,8 @@ import java.util.List;
 @Mapper
 public interface InvoiceHeaderMapper {
 
+    void create(InvoiceHeader build);
+
     List<InvoiceHeader> list (
             @Param("limit") int limit,
             @Param("offset") int offset,
@@ -19,4 +21,6 @@ public interface InvoiceHeaderMapper {
     InvoiceHeader detail(Long id);
 
     void remove(Long id);
+
+    void update(InvoiceHeader invoiceHeader);
 }

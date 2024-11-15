@@ -16,7 +16,30 @@
         <result column="last_update_date" property="lastUpdateDate"/>
     </resultMap>
 
+    <insert id="create" parameterType="com.hand.training.entity.InvoiceLine">
+        INSERT INTO invoice_line (invoice_line_id, invoice_header_id, item_number, item_description, unit_price, quantity, total_amount, remark)
+        VALUES (#{invoiceLineId}, #{invoiceHeaderId}, #{itemNumber}, #{itemDescription}, #{unitPrice}, #{quantity}, #{totalAmount}, #{remark})
+    </insert>
+
+    <select id="get" resultMap="invoiceLineMap">
+        SELECT * FROM invoice_line WHERE invoice_line_id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.hand.training.entity.InvoiceLine">
+        UPDATE invoice_line
+        SET
+            item_number = #{itemNumber},
+            item_description = #{itemDescription},
+            unit_price = #{unitPrice},
+            quantity = #{quantity},
+            total_amount = #{totalAmount},
+            remark = #{remark},
+            last_update_date = NOW()
+        WHERE invoice_line_id = #{invoiceLineId};
+    </update>
+
     <delete id="remove">
         DELETE FROM invoice_line WHERE invoice_header_id = #{id}
     </delete>
+
 </mapper>

@@ -1,7 +1,6 @@
 package com.hand.training.service;
 
-import com.hand.training.model.InvoiceHeaderResponse;
-import com.hand.training.model.InvoiceStatus;
+import com.hand.training.model.*;
 
 import java.util.List;
 
@@ -12,4 +11,10 @@ public interface InvoiceService {
     InvoiceHeaderResponse detail(Long id);
 
     void remove(List<Long> ids);
+
+    List<InvoiceHeaderResponse> save(List<InvoiceHeaderRequest> requests);
+
+    List<InvoiceHeaderResponse> saveData(List<InvoiceHeaderRequest> requests);
+
+    List<InvoiceLineResponse> saveDataLine(Long id, List<InvoiceLineRequest> requests);
 }
