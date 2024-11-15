@@ -19,7 +19,7 @@ public class InvoiceLineResponse {
 
     private Double unitPrice;
 
-    private Integer quantity;
+    private Double quantity;
 
     private Double totalAmount;
 

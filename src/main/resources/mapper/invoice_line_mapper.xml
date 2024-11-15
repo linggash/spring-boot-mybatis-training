@@ -32,7 +32,7 @@
             item_description = #{itemDescription},
             unit_price = #{unitPrice},
             quantity = #{quantity},
-            total_amount = #{totalAmount},
+            total_amount = unit_price*quantity,
             remark = #{remark},
             last_update_date = NOW()
         WHERE invoice_line_id = #{invoiceLineId};

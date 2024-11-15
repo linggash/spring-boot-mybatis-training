@@ -254,6 +254,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         });
         List<InvoiceHeaderResponse> responses = new ArrayList<>();
         requests.forEach(invoiceHeaderRequest -> {
+            invoiceHeaderMapper.updatePrice(invoiceHeaderRequest.getInvoiceHeaderId());
             InvoiceHeader invoiceHeader = invoiceHeaderMapper.detail(invoiceHeaderRequest.getInvoiceHeaderId());
             List<InvoiceLineResponse> invoiceLines = new ArrayList<>();
             invoiceHeader.getInvoiceLines().forEach(invoiceLine -> {
@@ -283,13 +284,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public List<InvoiceLineResponse> saveDataLine(Long id, List<InvoiceLineRequest> requests) {
-        validationService.validate(requests);
         InvoiceHeader invoiceHeader = invoiceHeaderMapper.detail(id);
         if (invoiceHeader == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data Not Found");
         }
         List<InvoiceLineResponse> responses = new ArrayList<>();
         requests.forEach(invoiceLineRequest -> {
+        validationService.validate(invoiceLineRequest);
             InvoiceLine invoiceLine = invoiceLineMapper.get(invoiceLineRequest.getInvoiceLineId());
             if (invoiceLine == null) {
                 invoiceLineMapper.create(InvoiceLine.builder()

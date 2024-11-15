@@ -31,20 +31,4 @@ public class ErrorController {
         return ResponseEntity.status(exception.getStatusCode())
                 .body(WebResponse.<String>builder().status("error").data(exception.getReason()).build());
     }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-
-        Map<String, String> errors = new HashMap<>();
-
-        // Mengiterasi semua error dan menambahkannya ke dalam map
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-
-        // Mengembalikan respons dengan status 400 dan daftar error
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
 }

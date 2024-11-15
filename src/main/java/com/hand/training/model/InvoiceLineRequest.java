@@ -22,7 +22,7 @@ public class InvoiceLineRequest {
     private Double unitPrice;
 
     @NotBlank(message = "quantity must not be blank")
-    private Integer quantity;
+    private Double quantity;
 
     private String remark;
 }

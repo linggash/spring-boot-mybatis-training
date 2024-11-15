@@ -23,6 +23,8 @@ public class InvoiceHeaderRequest {
     private String status;
 
     @NotBlank(message = "invoiceType must be filled")
+    @Size(max = 2)
+    @Pattern(regexp = "^(PI|EI)$", message = "Input must be one of the following characters: EI ; PI")
     private String invoiceType;
 
     private String remark;

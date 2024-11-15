@@ -23,4 +23,6 @@ public interface InvoiceHeaderMapper {
     void remove(Long id);
 
     void update(InvoiceHeader invoiceHeader);
+
+    void updatePrice(Long id);
 }
